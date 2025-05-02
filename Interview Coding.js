@@ -333,3 +333,142 @@ const s = "listen";
 const t = "silent";
 
 console.log(`Is "${t}" an anagram of "${s}"? →`, Anagram(s, t)); // Output: true
+
+
+
+// 3. Product of Array Except Self - #238
+function productExceptSelf(nums) {
+  const res = Array(nums.length).fill(1);
+  let prefix = 1;
+  for (let i = 0; i < nums.length; i++) {
+      res[i] = prefix;
+      prefix *= nums[i];
+  }
+  let suffix = 1;
+  for (let i = nums.length - 1; i >= 0; i--) {
+      res[i] *= suffix;
+      suffix *= nums[i];
+  }
+  return res;
+}
+console.log("Product Except Self:", productExceptSelf([1,2,3,4])); // [24,12,8,6]
+
+
+
+
+// /**
+//  * @param {number} x
+//  * @return {boolean}
+//  */
+// var isPalindrome = function(x) {
+//   if(x<0){
+//      return  false;
+//   }
+//   let str =x.toString();
+//   let reverse= str.split('').reverse().join('');
+//    return str===reverse;
+  
+// };
+
+
+
+
+
+// var isPalindrome = function(head) {
+//   if (!head || !head.next) return true;
+
+//   // Step 1: Find the middle using fast and slow pointers
+//   let slow = head;
+//   let fast = head;
+//   while (fast && fast.next) {
+//       slow = slow.next;
+//       fast = fast.next.next;
+//   }
+
+//   // Step 2: Reverse the second half
+//   let prev = null;
+//   while (slow) {
+//       let nextNode = slow.next;
+//       slow.next = prev;
+//       prev = slow;
+//       slow = nextNode;
+//   }
+
+//   // Step 3: Compare both halves
+//   let left = head;
+//   let right = prev;
+//   while (right) {
+//       if (left.val !== right.val) return false;
+//       left = left.next;
+//       right = right.next;
+//   }
+
+//   return true;
+// };
+
+
+
+
+// /**
+//  * Definition for singly-linked list.
+//  * function ListNode(val, next) {
+//  *     this.val = (val===undefined ? 0 : val)
+//  *     this.next = (next===undefined ? null : next)
+//  * }
+//  */
+// /**
+//  * @param {ListNode} head
+//  * @return {ListNode}
+//  */
+// var reverseList = function(head) {
+    
+// };
+
+// Define ListNode class
+function ListNode(val, next = null) {
+  this.val = val;
+  this.next = next;
+}
+
+// Reverse function
+function reverseList(head) {
+  let prev = null;
+  let curr = head;
+
+  while (curr !== null) {
+      let nextNode = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = nextNode;
+  }
+
+  return prev;
+}
+
+// Helper: Print linked list
+function printList(head) {
+  let arr = [];
+  while (head) {
+      arr.push(head.val);
+      head = head.next;
+  }
+  console.log(arr.join(" -> "));
+}
+
+// Create linked list: 1 -> 2 -> 3 -> 4 -> 5
+let head = new ListNode(1);
+head.next = new ListNode(2);
+head.next.next = new ListNode(3);
+head.next.next.next = new ListNode(4);
+head.next.next.next.next = new ListNode(5);
+
+// Before reverse
+console.log("Before reverse:");
+printList(head);
+
+// Reverse the list
+let reversedHead = reverseList(head);
+
+// After reverse
+console.log("After reverse:");
+printList(reversedHead);
